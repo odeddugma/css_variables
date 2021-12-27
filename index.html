@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Css Variables js JS</title>
+  </head>
+  <div class="hl"></div>
+  <body>
+    <header></header>
+    <h2>How Can We Use Css Variables With <span class="hl">JS</span>?</h2>
+
+    <div class="controls">
+      <label for="base">Base Color:</label>
+      <input type="color" name="base" value="#ffc600" />
+
+      <label for="spacing">Spacing:</label>
+      <input
+        type="range"
+        name="spacing"
+        min="10"
+        max="200"
+        value="10"
+        data-sizing="px"
+      />
+
+      <label for="blur">Blur:</label>
+      <input
+        type="range"
+        name="blur"
+        id="10"
+        min="0"
+        max="25"
+        value="10"
+        data-sizing="px"
+      />
+    </div>
+
+    <img src="./green.webp" alt="green-sky" />
+  </body>
+
+  <style>
+    /* define css variables in root -> the highest lavel of the html elements.*/
+    :root {
+      --base: red;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+    body {
+      text-align: center;
+    }
+    body {
+      background: black;
+      color: white;
+      font-weight: 100;
+      font-size: 23px;
+    }
+    .controls {
+      margin-bottom: 10px;
+    }
+  </style>
+  <script>
+    const inputs = document.querySelectorAll(".controls input");
+
+    function handleUpdate() {
+      const suffix = this.dataset.sizing || ""; // or '' is for those inputs that don't have data-sizing like the color one.
+      document.documentElement.style.setProperty(
+        `--${this.name}`,
+        this.value + suffix
+      );
+    }
+
+    inputs.forEach((input) => input.addEventListener("change", handleUpdate));
+    inputs.forEach((input) =>
+      input.addEventListener("mousemove", handleUpdate)
+    );
+  </script>
+</html>
